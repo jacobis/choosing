@@ -1,0 +1,9 @@
+{% if venue_list %}
+    <ul>
+        {% for venue in venue_list %}
+            <li><a href="{% url 'venues:detail' venue.id %}">{{ venue.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No venues are available.</p>
+{% endif %}

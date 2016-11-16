@@ -1,0 +1,25 @@
+{
+  "name": "choosing",
+  "version": "1.0.0",
+  "description": "* Author: Seongwoon Lee <remind.jacob@gmail.com> * Copyright: 2016, Seongwoon Lee",
+  "main": "index.js",
+  "dependencies": {
+    "grunt": "^1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobis/choosing.git"
+  },
+  "author": "Seongwoon Lee",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jacobis/choosing/issues"
+  },
+  "homepage": "https://github.com/jacobis/choosing#readme"
+}

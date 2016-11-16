@@ -1,0 +1,14 @@
+<h1>Poll create</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:create' %}" method="post">
+    {% csrf_token %}
+    <label for="users">User Ids</label>
+    <input type="text" name="users" value="">
+    <label for="users">Search Area</label>
+    <input type="text" name="area" value="">
+    <label for="users">Category</label>
+    <input type="text" name="category" value="">
+    <input type="submit" value="create">
+</form>
