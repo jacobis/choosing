@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,6 +11,10 @@ from venues.models import Venue
 from .models import Question, Answer, QuestionVenue, VenueRating
 
 
+def home(request):
+    return render(request, 'polls/home.html')
+
+@login_required
 def index(request):
     question_list = Question.objects.all()
     template = loader.get_template('polls/index.html')
@@ -19,6 +24,7 @@ def index(request):
 
     return HttpResponse(template.render(context, request))
 
+@login_required
 def create(request):
     if request.method == 'GET':
         template = loader.get_template('polls/create.html')
@@ -41,6 +47,7 @@ def create(request):
 
         return HttpResponseRedirect(reverse('polls:index'))
 
+@login_required
 def detail(request, question_id):
     try:
         question = Question.objects.get(pk=question_id)
@@ -49,6 +56,7 @@ def detail(request, question_id):
 
     return render(request, 'polls/detail.html', {'question': question})
 
+@login_required
 def results(request, question_id):
     try:
         question = Question.objects.get(pk=question_id)
@@ -64,6 +72,7 @@ def results(request, question_id):
 
     return render(request, 'polls/results.html', {'question': question, 'question_venues': question_venues})
 
+@login_required
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
 

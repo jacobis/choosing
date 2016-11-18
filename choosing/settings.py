@@ -34,10 +34,12 @@ INSTALLED_APPS = [
     # Choosing apps
     'polls.apps.PollsConfig',
     'venues.apps.VenuesConfig',
+    'accounts.apps.AccountsConfig',
 
     # Third-party apps
     'authtools',
     'django_extensions',
+    'social.apps.django_app.default',
 
     # Django default apps
     'django.contrib.admin',
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'choosing.urls'
@@ -75,6 +78,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -95,7 +101,7 @@ DATABASES = {
 
 
 # Custom user model
-AUTH_USER_MODEL = 'authtools.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Password validation
@@ -117,6 +123,43 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Python social auth
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT = '/home/'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '330212057353815'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c5bd188c50f7fc07222b3b5444f4ad35'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email, picture, age_range, gender'
+}
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    'choosing.pipeline.create_user',
+    'choosing.pipeline.save_profile_picture',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
+)
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -135,6 +178,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Media files
+
+MEDIA_URL = 'uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
 
 
 # Fixtures

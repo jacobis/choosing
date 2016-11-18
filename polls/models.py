@@ -3,8 +3,7 @@ from __future__ import absolute_import
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
-from authtools.models import User
-
+from accounts.models import User
 from venues.models import Venue
 
 
