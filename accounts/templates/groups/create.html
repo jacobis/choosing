@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h1>Group create</h1>
 
-</body>
-</html>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'create_group' %}" method="post">
+    {% csrf_token %}
+    <label for="name">Group Name</label>
+    <input type="text" name="name" value="">
+    <label for="members">Member Ids</label>
+    <input type="text" name="members" value="">
+    <input type="submit" value="create">
+</form>

@@ -1,4 +1,34 @@
-<h1>Home</h1>
+{% extends 'base.html' %}
 
-<p>{{ request.user.name }} ({{ request.user.email }})</p>
-<img src="{{ request.user.picture.url }}" alt="user profile picture" />
+{% block content %}
+    <h1>Choosing</h1>
+
+    <p>{{ request.user.name }} ({{ request.user.email }})</p>
+    <img src="{{ request.user.picture.url }}" alt="user profile picture" />
+
+    {% if question_list %}
+        <ul>
+            {% for question in question_list %}
+                <li>
+                    <a href="{% url 'polls:detail' question.id %}">
+                        #{{ question.id }} : {{ question.created }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No questions are available.</p>
+    {% endif %}
+
+    <p>
+      <a href="/groups/create/">group create</a>
+    </p>
+
+    <p>
+      <a href="/polls/create/">create</a>
+    </p>
+
+    <p>
+      <a href="/logout/">logout</a>
+    </p>
+{% endblock %}
