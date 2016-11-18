@@ -1,7 +1,7 @@
-<h1>Poll create</h1>
+{% extends 'base.html' %}
 
+{% block content %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
 <form action="{% url 'polls:create' %}" method="post">
     {% csrf_token %}
     <label for="users">User Ids</label>
@@ -12,3 +12,4 @@
     <input type="text" name="category" value="">
     <input type="submit" value="create">
 </form>
+{% endblock %}

@@ -1,7 +1,7 @@
-<h1>Group create</h1>
+{% extends 'base.html' %}
 
+{% block content %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
 <form action="{% url 'create_group' %}" method="post">
     {% csrf_token %}
     <label for="name">Group Name</label>
@@ -10,3 +10,4 @@
     <input type="text" name="members" value="">
     <input type="submit" value="create">
 </form>
+{% endblock %}

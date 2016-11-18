@@ -1,8 +1,12 @@
-<h1>#{{ question.id }} Poll Results</h1>
+{% extends 'base.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block content %}
+    <p>{{ question.id }} Poll Results</p>
 
-{% for question_venue in question_venues|dictsortreversed:"rating" %}
-<a href="{% url 'venues:detail' question_venue.venue.id %}">{{ question_venue.venue.name }}</a>
-<p>{{ question_venue.rating }} / 5.0</p>
-{% endfor %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    {% for question_venue in question_venues|dictsortreversed:"rating" %}
+        <a href="{% url 'venues:detail' question_venue.venue.id %}">{{ question_venue.venue.name }}</a>
+        <p>{{ question_venue.rating }} / 5.0</p>
+    {% endfor %}
+{% endblock %}

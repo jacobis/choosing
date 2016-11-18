@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Choosing</h1>
-
-    <p>{{ request.user.name }} ({{ request.user.email }})</p>
+    <p>[Develop] {{ request.user.name }} <a href="/logout/">logout</a></p>
     <img src="{{ request.user.picture.url }}" alt="user profile picture" />
 
     {% if question_list %}
@@ -26,9 +24,5 @@
 
     <p>
       <a href="/polls/create/">create</a>
-    </p>
-
-    <p>
-      <a href="/logout/">logout</a>
     </p>
 {% endblock %}

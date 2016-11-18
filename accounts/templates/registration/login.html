@@ -1,3 +1,8 @@
-<h2>login</h2>
+{% extends 'base.html' %}
 
-<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+{% block content %}
+    <p>Sign in to Choosing</p>
+    <a class="btn btn-default" href="{% url 'social:begin' 'facebook' %}" role="button">
+        Login with Facebook
+    </a>
+{% endblock %}
