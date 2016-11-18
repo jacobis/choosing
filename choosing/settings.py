@@ -126,9 +126,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Python social auth
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
 )
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT = '/home/'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -148,8 +150,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
     'social.pipeline.social_auth.associate_by_email',
-    'accounts.social.create_user',
-    'accounts.social.save_profile_picture',
+    'choosing.pipeline.create_user',
+    'choosing.pipeline.save_profile_picture',
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details'
