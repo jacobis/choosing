@@ -38,8 +38,10 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'authtools',
+    'djangobower',
     'django_extensions',
     'social.apps.django_app.default',
+    'pytz',
 
     # Django default apps
     'django.contrib.admin',
@@ -70,7 +72,10 @@ ROOT_URLCONF = 'choosing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': (
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'polls', 'templates', 'polls'),
+        ),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -178,6 +183,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_statics')
+STATICFILES_DIRS = [
+    ("components", os.path.join(BASE_DIR, 'bower_components')),
+    ("static", os.path.join(BASE_DIR, 'static')),
+    ("static", os.path.join(BASE_DIR, 'polls', 'static')),
+]
+
+STATICFILES_FINDER = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+	'djangobower.finders.BowerFinder'
+]
+
+
+# Bower
+# BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'bower_components')
+BOWER_INSTALLED_APPS = [
+    "initialize-css",
+    "material-design-lite"
+]
 
 
 # Media files

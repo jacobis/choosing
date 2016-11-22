@@ -1,0 +1,59 @@
+.profile {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.profile .profile-row {
+    height: 75px;
+}
+
+.profile img {
+    float: left;
+    width: 75px;
+    height: 75px;
+}
+
+.profile .info {
+    float: left;
+    padding: 15px;
+}
+
+.profile p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.poll_list {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 0;
+}
+
+.poll_list .section_title {
+    margin: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.poll_list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.poll_list li {
+    padding: 15px 20px;
+}
+
+.poll_list p {
+    margin: 0;
+}
+
+.poll_list img {
+    width: 30px;
+    height: 30px;
+}
+
+footer {
+    text-align: right;
+}

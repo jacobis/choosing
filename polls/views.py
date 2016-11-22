@@ -17,8 +17,10 @@ def home(request):
     template = loader.get_template('polls/home.html')
 
     if request.user.is_authenticated():
-        question_list = Question.objects.filter(answer__user=request.user)
-        context.update({'question_list': question_list})
+        current_question_list = Question.current.all().filter(answer__user=request.user)
+        past_question_list = Question.past.all().filter(answer__user=request.user)
+
+        context.update({'current_question_list': current_question_list, 'past_question_list': past_question_list})
 
     return HttpResponse(template.render(context, request))
 
@@ -43,7 +45,7 @@ def create(request):
         venues = Venue.objects.filter(address__contains=area)[:5]
         QuestionVenue.objects.bulk_create([QuestionVenue(question=question, venue=venue) for venue in venues])
 
-        return HttpResponseRedirect(reverse('polls:home'))
+        return HttpResponseRedirect(reverse('home'))
 
 
 @login_required
@@ -84,7 +86,7 @@ def vote(request, question_id):
                            request.POST.getlist('question_venues')]
         question_venues_with_rank = dict(zip(question_venues, request.POST.getlist('ranks')))
 
-        VenueRating.objects.bulk_create([VenueRating(answer=answer, question_venue=qvwr[0], rating=qvwr[1]) 
+        VenueRating.objects.bulk_create([VenueRating(answer=answer, question_venue=qvwr[0], rating=qvwr[1])
                                          for qvwr in question_venues_with_rank.items()])
 
     except Exception as e:

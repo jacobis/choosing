@@ -4,15 +4,17 @@ from .models import *
 
 
 class AccountsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'email', 'name', 'date_joined',)
 
 
 class GroupsAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('created', 'modified',)
+    list_display = ('id', 'name', 'created', 'modified',)
 
 
 class MembershipAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('created', 'modified',)
+    list_display = ('id', 'group', 'user', 'leader', 'created', 'modified',)
 
 
 admin.site.register(User, AccountsAdmin)

@@ -1,0 +1,23 @@
+<ul>
+    {% for question in past_question_list|dictsortreversed:"id" %}
+        <li {% if forloop.last %} class='last'{% endif %}>
+            <span>#{{ question.id }}</span>
+            <a href="{% url 'polls:detail' question.id %}">
+                {{ question.created|date:"m월 d일 (D)" }}
+                {{ question.created|time:"H시 i분" }}
+            </a>
+            {% if question.completed %}
+                {%  with question.question_venues|dictsortreversed:"rating"|first as first_qv %}
+                    <p>{{ first_qv.venue.name }}
+                    {{ first_qv.rating }} / 5.0</p>
+                {% endwith %}
+            {% else %}
+                <div class="members">
+                    {% for answer in question.answer_set.all %}
+                        <img class="img-circle" src="{{ answer.user.picture.url }}" />
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

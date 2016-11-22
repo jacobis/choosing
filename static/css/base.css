@@ -1,0 +1,31 @@
+* { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
+
+header {
+    background-color: #5c6bc0;
+    padding: 10px;
+}
+
+header .header_row {
+    text-align: center;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header .title {
+    color: #ffffff;
+}
+
+footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    bottom: 0px;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
