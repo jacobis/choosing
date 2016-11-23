@@ -54,6 +54,11 @@
     height: 30px;
 }
 
+.no_poll_list {
+    padding: 140px 0 0 0;
+    text-align: center;
+}
+
 footer {
     text-align: right;
 }
